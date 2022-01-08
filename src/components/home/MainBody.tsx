@@ -2,7 +2,7 @@ let text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
 
 const HomeMainBody = () => {
     return (
-        <div className="flex flex-col bg-gray-200 w-screen h-screen items-center p-12">
+        <div className="flex flex-col bg-gray-200 dark:bg-white w-screen h-screen items-center p-12">
             <p className="max-w-2xl text-center">{text}</p>
 
             <button className="tracking-widest bg-gray-600 text-white mt-24 px-24 py-2 hover:bg-gray-400  hover:shadow-md hover:rounded-lg duration-300">
