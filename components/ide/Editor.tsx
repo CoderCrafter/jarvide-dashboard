@@ -8,9 +8,9 @@ const Editor = () => {
     }
 
     return (
-        <div className="bg-gray-900 h-screen w-screen p-4">
+        <div className="bg-gray-900 h-screen w-screen">
                 <textarea value={text} onChange={onChangeHandler}
-                className="bg-transparent outline-none text-white font-mono tracking-wider w-full h-screen resize-none" spellCheck="false" autoComplete="false">
+                className="bg-black outline-none text-white font-mono tracking-wider w-full h-full resize-none p-4" spellCheck="false" autoComplete="false">
 
                 </textarea>
             </div>
