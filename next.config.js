@@ -3,7 +3,8 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: [
-      'cdn.discordapp.com'
+      'cdn.discordapp.com',
+      'discord.com',
     ]
   }
 }
