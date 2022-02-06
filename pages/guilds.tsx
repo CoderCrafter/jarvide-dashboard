@@ -35,7 +35,6 @@ function getAccessToken() {
     if (typeof window !== 'undefined') {
         token = localStorage.getItem("access_token");
     }
-    console.log(token);
     return token;
 }
 
@@ -48,6 +47,10 @@ const DashboardButton = () => {
 }
 
 const Guild = ({iconURL, name, id}: IGuildPropType) => {
+    useEffect(() => {
+        localStorage.removeItem('access_token');
+    });
+
     return (
         <div className="flex flex-col items-center w-max pb-8">
             <div className="p-2">
@@ -85,7 +88,6 @@ const Guilds = () => {
 
         (async () => {
             const guilds = await getGuilds(token);
-            console.log(guilds);
             setData(guilds);
         })();
     }, []);

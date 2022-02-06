@@ -54,8 +54,6 @@ const Callback = () => {
 
         (async () => {
             const { access_token } = await exchangeCode(code);
-            console.log("access token: ");
-            console.log(access_token);
             toLocalStorage(access_token);
         })();
     }, [router]);
