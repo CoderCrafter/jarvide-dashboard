@@ -26,7 +26,7 @@ async function getGuilds(token: string) {
             "Authorization": "Bearer " + token
         }
     });
-
+    console.log(await res.data);
     return await res.data;
 }
 
