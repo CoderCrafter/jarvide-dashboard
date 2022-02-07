@@ -4,18 +4,9 @@ import { useEffect, useState } from "react";
 import qs from 'qs'
 import Link from "next/link";
 
-interface IOauthResponseType {
-    access_token: string,
-    token_type: "Bearer",
-    expires_in: number,
-    refresh_token: string,
-    scope: string
-}
+import config from "../config";
 
-async function exchangeCode(code: string | string[] | undefined) {
-    const client_id = '938891715425751071';
-    const client_secret = 'aeqhu6YX8RiWfguqJDuX95TmlLk5kSmK';
-    const redirect_uri = 'http://localhost:3000/callback';
+async function exchangeCode(code: string) {
 
     const res = await axios({
         baseURL: 'https://discord.com/api/v8',
@@ -27,9 +18,9 @@ async function exchangeCode(code: string | string[] | undefined) {
         },
 
         data: qs.stringify({
-            client_id,
-            client_secret,
-            redirect_uri,
+            client_id: config.oauth_client_id,
+            client_secret: config.oauth_client_secret,
+            redirect_uri: config.oauth_redirect_uri,
             code,
             grant_type: "authorization_code"
         }),
@@ -47,16 +38,23 @@ function toLocalStorage(access_token: string) {
 
 const Callback = () => {
     const router = useRouter();
+    const [hasError, setError] = useState(false);
 
     useEffect(() => {
         if(!router.isReady) return;
         const code = router.query.code;
+        if(typeof code !== 'string') {
+            setError(true);
+            return;
+        }
 
         (async () => {
             const { access_token } = await exchangeCode(code);
             toLocalStorage(access_token);
         })();
     }, [router]);
+
+    if(hasError) return <p>Something went wrong. Please try again.</p>
 
     return (
         <Link href="/guilds" passHref>
